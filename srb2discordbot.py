@@ -177,7 +177,7 @@ def json_config():
         print(Fore.YELLOW + "Warning: If you are hosting multiple SRB2 servers on this computer, enter a new name for the SRB2 .exe file. For example \"my_server1\". (This is to avoid conflicts with other servers)")
         inp_srb2app = input("The new name of the SRB2 EXE file:")
         if inp_srb2app == "":
-            inp_srb2app = "srb2win.exe"
+            inp_srb2app = "srb2kart.exe"
         elif inp_srb2app != "":
             inp_srb2app = inp_srb2app.replace(".exe", '')
             inp_srb2app = inp_srb2app+".exe"
