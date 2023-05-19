@@ -1,6 +1,6 @@
 #Set title of a console
 import os
-consoletitle = "SRB2 DiscordBot Console"
+consoletitle = "SRB2K DiscordBot Console"
 os.system("title " + consoletitle)
 
 
@@ -10,6 +10,7 @@ from colorama import Back
 from colorama import Style
 from tkinter import messagebox
 from sys import stderr
+import asyncio
 import transliterate
 import subprocess
 import datetime
@@ -85,18 +86,18 @@ print("Message logs will be written to " + mlogpath)
 
 #Check files for lua, if they are missing, then create them
 #This is necessary to avoid errors
-if os.path.exists("luafiles") == False:
-    os.mkdir("luafiles")
-if os.path.exists("luafiles/client") == False:
-    os.mkdir("luafiles/client")
-if os.path.exists("luafiles/client/DiscordBot") == False:
-    os.mkdir("luafiles/client/DiscordBot")
-if os.path.isfile("latest-log.txt") == False:
-    create_file = open("latest-log.txt", "w+")
+if os.path.exists("SRB2K/luafiles") == False:
+    os.mkdir("SRB2K/luafiles")
+if os.path.exists("SRB2K/luafiles/client") == False:
+    os.mkdir("SRB2K/luafiles/client")
+if os.path.exists("SRB2K/luafiles/client/DiscordBot") == False:
+    os.mkdir("SRB2K/luafiles/client/DiscordBot")
+if os.path.isfile("SRB2K/log.txt") == False:
+    create_file = open("SRB2K/log.txt", "w+")
     create_file.close()
 for luafiles in "discordmessage.txt", "logcom.txt", "Messages.txt", "Players.txt", "Stats.txt", "console.txt":
-    if os.path.isfile("luafiles/client/DiscordBot/"+luafiles) == False:
-        create_file = open("luafiles/client/DiscordBot/"+luafiles, "w+")
+    if os.path.isfile("SRB2K/luafiles/client/DiscordBot/"+luafiles) == False:
+        create_file = open("SRB2K/luafiles/client/DiscordBot/"+luafiles, "w+")
         create_file.write("")
         create_file.close()
 
@@ -279,12 +280,12 @@ shutil.copy(r'srb2discordbot/config.json', 'srb2discordbot/backups/config.json')
 
 #Check if there is an exe file of the game and if there is a custom exe
 if os.path.isfile(config["srb2exe"]) == False:
-    while os.path.isfile("srb2win.exe") == False:
-         messagebox.showwarning("Warning", "srb2win.exe was not found.")
+    while os.path.isfile("srb2kart.exe") == False:
+         messagebox.showwarning("Warning", "srb2kart.exe was not found.")
          if os.path.isfile(config["srb2exe"]) == True:
              break
-    if config["srb2exe"] != "srb2win.exe" and os.path.isfile("srb2win.exe") == True:
-        shutil.copy(r'srb2win.exe', config["srb2exe"])
+    if config["srb2exe"] != "srb2kart.exe" and os.path.isfile("srb2kart.exe") == True:
+        shutil.copy(r'srb2kart.exe', config["srb2exe"])
 
 
 #Parameters for .exe srb2 file
@@ -636,22 +637,23 @@ def startserver():
     for proc in psutil.process_iter():
         name = proc.name()
         #Check if the server is running
-        if name == config["srb2exe"]:
+        if ("SRB2K/" + name) == config["srb2exe"]:
             #If the server is running, then wait for an answer
             isstarted = True
             restartsrb2 = input("Server already running, restart? (Y/n):")
             if restartsrb2.lower() == "yes" or restartsrb2.lower() == "y" or restartsrb2.lower() == "of course" or restartsrb2.lower() == "yeah":
                 #Close the server if the answer is yes
                 isstarted = False
-                shutil.copy(r'latest-log.txt', "srb2discordbot/srb2-logs/log-" + timestart + ".txt")
-                os.system("taskkill /f /im " + config["srb2exe"])
-                log_file = open("latest-log.txt", "w")
+                shutil.copy(r'SRB2K/log.txt', "srb2discordbot/srb2-logs/log-" + timestart + ".txt")
+                x = config["srb2exe"].split("/")
+                os.system("taskkill /f /im " + x[1])
+                log_file = open("SRB2K/log.txt", "w")
                 log_file.write("")
                 log_file.close()
             else:
                 server_isplaying = True
                 #Get Gametype
-                file_concole = open('luafiles/client/DiscordBot/console.txt', 'a')
+                file_concole = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                 file_concole.write('gametype\n')
                 file_concole.close
             break
@@ -665,7 +667,7 @@ def startserver():
         mapsrb2 = file_mapsrb2.read()
         file_mapsrb2.close()
         #Start the server
-        log_file = open("latest-log.txt", "w")
+        log_file = open("SRB2K/log.txt", "w")
         log_file.write("")
         log_file.close()
         if currentpcfg == None:
@@ -673,6 +675,8 @@ def startserver():
         else:
             processsrb2 = subprocess.Popen(config["srb2exe"] + " " + mapsrb2 + " " + currentpcfg + " " + parameters)
         isstarted = True
+        #this is where we would send the server invite
+        createActivity()
 
 
 #Restarting the server if it is closed for any reason
@@ -686,16 +690,17 @@ def restartserver():
     server_isplaying = False
     avoidautorestart = True
     if srblog != None:
-        shutil.copy(r'latest-log.txt', "srb2discordbot/srb2-logs/" + srblog)
-        log_file = open("latest-log.txt", "w")
+        shutil.copy(r'SRB2K/log.txt', "srb2discordbot/srb2-logs/" + srblog)
+        log_file = open("SRB2K/log.txt", "w")
         log_file.write("")
         log_file.close()
     print("Restarting server...             ")
     for proc in psutil.process_iter():
         name = proc.name()
         #Close the crashed server
-        if name == config["srb2exe"]:
-            os.system("taskkill /f /im " + config["srb2exe"])
+        if ("SRB2K/" + name) == config["srb2exe"]:
+            x = config["srb2exe"].split("/")
+            os.system("taskkill /f /im " + x[1])
             break
     #Read parameters for the server
     file_parameters = open("srb2discordbot/serverparameters/parameters.cfg", "r")
@@ -715,6 +720,7 @@ def restartserver():
     else:
         processsrb2 = subprocess.Popen(config["srb2exe"] + " " + mapsrb2 + " " + currentpcfg + " " + parameters)
     isstarted = True
+    createActivity()
 
 
 #This function creates an embed containing information about the SRB2 server
@@ -735,7 +741,7 @@ def getsrbstats():
         cline = 0 #Number of rows in one list
         plist = 1 #Numbers of lists
         #Open statistics of SRB2 Server
-        srbstats = open('luafiles/client/DiscordBot/Stats.txt', 'r')
+        srbstats = open('SRB2K/luafiles/client/DiscordBot/Stats.txt', 'r')
         #Get server name
         reg = re.compile("[^a-zA-Z0-9 !@#$%^&*()-_=+{}[]|\/?<>.,`~]")
         servername = srbstats.readline()
@@ -748,6 +754,8 @@ def getsrbstats():
         nextlevel = srbstats.readline()
         #Get info about emeralds
         emeralds = srbstats.readline()
+        if emeralds == '':
+            emeralds = "No Emeralds"
         for element in emotes:
             emeralds = emeralds.replace(element, emotes[element])
         #Get all skins on the server
@@ -785,7 +793,6 @@ def getsrbstats():
         embedstats.add_field(name="Nextmap", value=nextlevel, inline=True)
         if gametype:
             embedstats.add_field(name="Gametype", value=gametype, inline=True)
-        embedstats.add_field(name="Emeralds", value=emeralds, inline=True)
         embedstats.add_field(name="Skins", value=skins, inline=True)
         #Split player list
         while True:
@@ -881,7 +888,7 @@ class MyClient(discord.Client):
         
         #Get bot name and avatar for embed
         botname = self.user
-        botavatar = self.user.avatar_url
+        botavatar = self.user.avatar
         twoxsdavoid = 2
 
 
@@ -892,8 +899,8 @@ class MyClient(discord.Client):
                 #Current time
                 now = datetime.datetime.now()
                 #Opening the log file
-                file_log = open("latest-log.txt", "r")
-                log = [l.strip() for l in file_log.readlines()]
+                file_log = open("SRB2K/log.txt", "r")
+                log = [l.strip() for l in file_log]
                 if log_lens != 0:
                     #Don't read what was readed
                     for line in log[log_lens:]:
@@ -1042,7 +1049,7 @@ class MyClient(discord.Client):
                     isstarted = False
                     for proc in psutil.process_iter():
                         name = proc.name()
-                        if name == config["srb2exe"]:
+                        if ("SRB2K/" + name) == config["srb2exe"]:
                             isstarted = True
                             break
                     #Restart if it is closed
@@ -1086,14 +1093,14 @@ class MyClient(discord.Client):
                     print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' there was a problem sending a request to Discord')
             except:
                 if config["debug"] == True:
-                    print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' unknown error while reading latest-log.txt file')
-            time.sleep(0.5) #Timer
+                    print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' unknown error while reading log.txt file')
+            await asyncio.sleep(0.5) #Timer
 
             
             if server_isplaying == True:
                 try:
                     #Open the file and find out how many players are on the server and send it to the status
-                    statusfile = open('luafiles/client/DiscordBot/Players.txt', 'r')
+                    statusfile = open('SRB2K/luafiles/client/DiscordBot/Players.txt', 'r')
                     text_game = statusfile.read()
                     if text_game.find("Game is paused") != -1:
                         dstatus=discord.Status.idle
@@ -1117,7 +1124,7 @@ class MyClient(discord.Client):
                 if isdiscordborwork == True:
                     #Outputting messages from the game and passing them to the channel
                     try:
-                        srbmessages = open('luafiles/client/DiscordBot/Messages.txt', 'r')
+                        srbmessages = open('SRB2K/luafiles/client/DiscordBot/Messages.txt', 'r')
                         srbm = srbmessages.read()
                         srbmessages.close()
                     #If the file is busy, don't close the program
@@ -1127,7 +1134,7 @@ class MyClient(discord.Client):
                     #Send a message to discord
                     if srbm != '':
                         try:
-                            srbmessages = open('luafiles/client/DiscordBot/Messages.txt', 'w')
+                            srbmessages = open('SRB2K/luafiles/client/DiscordBot/Messages.txt', 'w')
                             srbmessages.write('')
                             srbmessages.close()
                             await self.get_channel(config["post_id"]).send(srbm)
@@ -1157,7 +1164,7 @@ class MyClient(discord.Client):
                     #Outputting command logs from the game and passing them to the channel
                     if config["log_id"] != "None":
                         try:
-                            srblogcom = open('luafiles/client/DiscordBot/logcom.txt', 'r')
+                            srblogcom = open('SRB2K/luafiles/client/DiscordBot/logcom.txt', 'r')
                             srblc = srblogcom.read()
                             srblogcom.close()
                         #If the file is busy, don't close the program
@@ -1166,7 +1173,7 @@ class MyClient(discord.Client):
                                print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' unable to read logcom.txt file because it is busy.')
                         if srblc != '':
                             try:
-                                srblogcom = open('luafiles/client/DiscordBot/logcom.txt', 'w')
+                                srblogcom = open('SRB2K/luafiles/client/DiscordBot/logcom.txt', 'w')
                                 srblogcom.write('')
                                 srblogcom.close()
                                 await self.get_channel(config["log_id"]).send(srblc)
@@ -1366,7 +1373,7 @@ class MyClient(discord.Client):
             content = (content.translate({ord('\n'): ' '}))
             content = (reg.sub('', content))
             #Open a file and write message
-            dmsg = open('luafiles/client/DiscordBot/discordmessage.txt', 'a')
+            dmsg = open('SRB2K/luafiles/client/DiscordBot/discordmessage.txt', 'a')
             dmsg.write('\"'+content+'\" ')
             dmsg.close
         elif message.channel == channel and message.author != self.user and gamepaused == True:
@@ -1424,7 +1431,7 @@ class MyClient(discord.Client):
                                         content = (content.translate({ord('а'): '\"'}))
                                         content = (content.translate({ord('б'): '\''}))
                                         #Open a file and write message
-                                        dcon = open('luafiles/client/DiscordBot/console.txt', 'a')
+                                        dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                                         dcon.write("kick "+content+'\n')
                                         dcon.close
                                         await message.add_reaction("✅")
@@ -1463,7 +1470,7 @@ class MyClient(discord.Client):
                                         content = (content.translate({ord('а'): '\"'}))
                                         content = (content.translate({ord('б'): '\''}))
                                         #Open a file and write message
-                                        dcon = open('luafiles/client/DiscordBot/console.txt', 'a')
+                                        dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                                         dcon.write("ban "+content+'\n')
                                         dcon.close
                                         await message.add_reaction("✅")
@@ -1497,7 +1504,7 @@ class MyClient(discord.Client):
                                         content = (content.translate({ord('а'): '\"'}))
                                         content = (content.translate({ord('б'): '\''}))
                                         #Open a file and write message
-                                        dcon = open('luafiles/client/DiscordBot/console.txt', 'a')
+                                        dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                                         dcon.write("map "+content+'\n')
                                         dcon.close
                                         await message.add_reaction("✅")
@@ -1530,7 +1537,7 @@ class MyClient(discord.Client):
                                         content = (content.translate({ord('а'): '\"'}))
                                         content = (content.translate({ord('б'): '\''}))
                                         #Open a file and write message
-                                        dcon = open('luafiles/client/DiscordBot/console.txt', 'a')
+                                        dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                                         dcon.write("csay "+content+'\n')
                                         dcon.close
                                         '''
@@ -1558,7 +1565,7 @@ class MyClient(discord.Client):
                             if message.content.startswith(config["botprefix"]+"exitlevel"):
                                 if gamepaused == False and server_isplaying == True:
                                     #Open a file and write message
-                                    dcon = open('luafiles/client/DiscordBot/console.txt', 'a')
+                                    dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                                     dcon.write("exitlevel\n")
                                     dcon.close
                                     await message.add_reaction("✅")
@@ -1600,13 +1607,13 @@ class MyClient(discord.Client):
             messagebox.showerror("Error: Missing Permissions", "No access to the channel, give access to read and send messages and reactions for bot.")
                         
 
-#intents = discord.Intents.default()
-#intents.members = True
+intents = discord.Intents.default()
+intents.message_content = True
 #Bot launch
 #client = MyClient(intents=intents) discord.errors.PrivilegedIntentsRequired:
 if isdiscordborwork == False:
     isdiscordborwork = True
-    client = MyClient()
+    client = MyClient(intents=intents)
     try:
         #Get a token and connect to the bot
         print("Connecting to a discord bot...")
