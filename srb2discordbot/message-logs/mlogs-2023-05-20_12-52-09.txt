@@ -1,0 +1,5 @@
+[2023-05-20 12:52:17]SRB2 Status Message: Server has been started!
+[2023-05-20 12:52:19]SRB2 Status Message: Map is now "MAP14: Twinkle Cart"
+[2023-05-20 12:52:28]Discord command: <Nixodemus1#8347> !srb2k
+[2023-05-20 12:54:28]Discord command: <Nixodemus1#8347> !srb2k help
+[2023-05-20 12:54:32]Discord command: <Nixodemus1#8347> !srb2khelp

@@ -1,11 +1,11 @@
 {
 "token": "MTEwODQxNTcxODQ0NzM4NjcwNA.GYsxUo.AALg36czIW5ssykh9ATeA8Xm1tOQR8j4TTyRfc",
-"post_id": 1108953334263590983,
-"status_id": 1108417450292302024,
-"log_id": 1108417403127345252,
+"post_id": 1109276260510732328,
+"status_id": 1109276299178016880,
+"log_id": 1109276322502549635,
 "botprefix": "!srb2k",
 "srb2exe": "SRB2K/srb2kart.exe",
-"ip": "",
-"url": "None.lol",
+"ip": "192.168.12.185",
+"url": "wiki.srb2.org",
 "debug": true
 }

@@ -1,0 +1,81 @@
+,MAPxx,Map name,Silver time,Gold time,Picture,Minimap
+,Ring Cup,Ring Cup,Ring Cup,Ring Cup,Ring Cup,Ring Cup
+0,MAP01,Green Hills Zone,01:50.00,01:26.31,/w/images/d/df/MAP01-kart.png,/w/images/4/4c/MAP01-kart-minimap.png
+1,MAP02,Dark Race,02:40.00,02:07.60,/w/images/a/a7/MAP02-kart.png,/w/images/a/a1/MAP02-kart-minimap.png
+2,MAP03,Northern District Zone,02:40.00,02:03.91,/w/images/4/43/MAP03-kart.png,/w/images/9/97/MAP03-kart-minimap.png
+3,MAP04,Darkvile Garden Zone,02:00.00,01:38.62,/w/images/7/7a/MAP04-kart.png,/w/images/b/b9/MAP04-kart-minimap.png
+4,MAP05,Daytona Speedway Zone,02:10.00,01:40.71,/w/images/6/68/MAP05-kart.png,/w/images/e/e4/MAP05-kart-minimap.png
+6,MAP06,Egg Zeppelin Zone,02:20.00,01:55.52,/w/images/6/6a/MAP06-kart.png,/w/images/e/ed/MAP06-kart-minimap.png
+7,MAP07,Sonic Speedway,02:20.00,01.55:45,/w/images/0/01/MAP07-kart.png,/w/images/8/87/MAP07-kart-minimap.png
+8,MAP08,Hill Top Zone,01:50.00,01:33.74,/w/images/7/74/MAP08-kart.png,/w/images/3/30/MAP08-kart-minimap.png
+9,MAP09,Misty Maze Zone,02:50.00,02:16.11,/w/images/7/7a/MAP09-kart.png,/w/images/6/67/MAP09-kart-minimap.png
+10,MAP10,Grand Metropolis,02:20.00,02:05.08,/w/images/f/f5/MAP10-kart.png,/w/images/5/5e/MAP10-kart-minimap.png
+12,MAP11,Sunbeam Paradise,02:00.00,01:45.07,/w/images/c/c4/MAP11-kart.png,/w/images/1/19/MAP11-kart-minimap.png
+13,MAP12,Diamond Square Zone,02:10.00,01:52.22,/w/images/b/bf/MAP12-kart.png,/w/images/c/c0/MAP12-kart-minimap.png
+14,MAP13,Midnight Meadow Zone,02:15.00,01:49.88,/w/images/c/c6/MAP13-kart.png,/w/images/9/9d/MAP13-kart-minimap.png
+15,MAP14,Twinkle Cart,02:00.00,01:33.65,/w/images/8/8e/MAP14-kart.png,/w/images/a/a4/MAP14-kart-minimap.png
+16,MAP15,Pleasure Castle,02:00.00,01:42.60,/w/images/f/f0/MAP15-kart.png,/w/images/5/52/MAP15-kart-minimap.png
+18,MAP16,Paradise Hill Zone,02:40.00,02:28.20,/w/images/4/4a/MAP16-kart.png,/w/images/0/0b/MAP16-kart-minimap.png
+19,MAP17,Sub-Zero Peak Zone,02:50.00,02:22.17,/w/images/2/2a/MAP17-kart.png,/w/images/f/f5/MAP17-kart-minimap.png
+20,MAP18,Sapphire Coast Zone,02:10.00,01:45.60,/w/images/6/66/MAP18-kart.png,/w/images/f/fb/MAP18-kart-minimap.png
+21,MAP19,Sand Valley Zone,02:50.00,02:20.88,/w/images/e/ed/MAP19-kart.png,/w/images/1/10/MAP19-kart-minimap.png
+22,MAP20,Megablock Castle Zone,02:25.00,02:00.57,/w/images/e/e1/MAP20-kart.png,/w/images/6/63/MAP20-kart-minimap.png
+24,MAP21,Canyon Rush Zone,02:20.00,01:55.80,/w/images/4/4b/MAP21-kart.png,/w/images/a/a7/MAP21-kart-minimap.png
+25,MAP22,Casino Resort Zone,02:00.00,01:43.22,/w/images/f/f4/MAP22-kart.png,/w/images/e/e2/MAP22-kart-minimap.png
+26,MAP23,Silvercloud Island Zone,02:30.00,02:05.28,/w/images/2/23/MAP23-kart.png,/w/images/4/4c/MAP23-kart-minimap.png
+27,MAP24,Blue Mountain Zone,02:50.00,02:32.02,/w/images/5/5c/MAP24-kart.png,/w/images/9/91/MAP24-kart-minimap.png
+28,MAP25,Petroleum Refinery Zone,02:30.00,02:07.88,/w/images/c/ca/MAP25-kart.png,/w/images/4/4e/MAP25-kart-minimap.png
+30,MAP26,Desert Palace Zone,02:00.00,01:34.14,/w/images/c/c6/MAP26-kart.png,/w/images/7/72/MAP26-kart-minimap.png
+31,MAP27,Aurora Atoll Zone,02:40.00,02:16.14,/w/images/9/92/MAP27-kart.png,/w/images/9/90/MAP27-kart-minimap.png
+32,MAP28,Barren Badlands Zone,02:30.00,02:13.42,/w/images/9/9a/MAP28-kart.png,/w/images/c/cf/MAP28-kart-minimap.png
+33,MAP29,Red Barrage Area,02:50.00,02:48.22,/w/images/d/db/MAP29-kart.png,/w/images/1/1b/MAP29-kart-minimap.png
+34,MAP30,Midnight Channel,02:15.00,01:55.62,/w/images/4/49/MAP30-kart.png,/w/images/5/54/MAP30-kart-minimap.png
+36,MAP31,Vanilla Hotel Zone,02:40.00,02:21.25,/w/images/8/88/MAP31-kart.png,/w/images/5/5d/MAP31-kart-minimap.png
+37,MAP32,Toxic Palace Zone,02:30.00,01:55.31,/w/images/2/23/MAP32-kart.png,/w/images/e/e5/MAP32-kart-minimap.png
+38,MAP33,Ancient Tomb Zone,02:30.00,01:55.31,/w/images/a/aa/MAP33-kart.png,/w/images/b/ba/MAP33-kart-minimap.png
+39,MAP34,Cloud Cradle Zone K,02:00.00,01:42.71,/w/images/5/5a/MAP34-kart.png,/w/images/9/98/MAP34-kart-minimap.png
+40,MAP35,Volcanic Valley Zone,02:45.00,02:14.42,/w/images/d/da/MAP35-kart.png,/w/images/6/67/MAP35-kart-minimap.png
+42,MAP36,Kodachrome Void Zone,01:50.00,01:34.68,/w/images/6/68/MAP36-kart.png,/w/images/5/57/MAP36-kart-minimap.png
+43,MAP37,Boiling Bedrock Zone,02:10.00,01:40.02,/w/images/c/c6/MAP37-kart.png,/w/images/1/12/MAP37-kart-minimap.png
+44,MAP38,Egg Quarters,02:45.00,02:20.57,/w/images/6/6c/MAP38-kart.png,/w/images/d/d0/MAP38-kart-minimap.png
+45,MAP39,Virtual Highway Zone,02:25.00,02:03.37,/w/images/e/e3/MAP39-kart.png,/w/images/c/cc/MAP39-kart-minimap.png
+46,MAP40,Eggman's Nightclub Zone,02:00.00,01:41.42,/w/images/a/a4/MAP40-kart.png,/w/images/9/93/MAP40-kart-minimap.png
+48,MAP41,KKR Ganbare Dochu 2,01:40.00,01:13.48,/w/images/6/6c/MAP41-kart.png,/w/images/b/bf/MAP41-kart-minimap.png
+49,MAP42,CK Chao Circuit 1,01:50.00,01:28.31,/w/images/4/40/MAP42-kart.png,/w/images/e/ee/MAP42-kart-minimap.png
+50,MAP43,CK Chao Circuit 2,02:00.00,01:38.68,/w/images/6/68/MAP43-kart.png,/w/images/5/58/MAP43-kart-minimap.png
+51,MAP44,CK Cloud Tops 2,01:50.00,01:24.51,/w/images/7/76/MAP44-kart.png,/w/images/4/4f/MAP44-kart-minimap.png
+52,MAP45,CK Regal Raceway,02:10.00,01:45.51,/w/images/c/c3/MAP45-kart.png,/w/images/a/a9/MAP45-kart-minimap.png
+54,MAP46,SD2 Balloon Panic,01:50.00,01:38.20,/w/images/2/27/MAP46-kart.png,/w/images/5/5a/MAP46-kart-minimap.png
+55,MAP47,SM Special Stage 3,02:10.00,01:32.51,/w/images/a/a2/MAP47-kart.png,/w/images/a/a6/MAP47-kart-minimap.png
+56,MAP48,MKSC Sky Garden,01:50.00,01:27.51,/w/images/e/e2/MAP48-kart.png,/w/images/9/9b/MAP48-kart-minimap.png
+57,MAP49,MKDS Peach Gardens,01:45.00,01:25.14,/w/images/9/97/MAP49-kart.png,/w/images/5/51/MAP49-kart-minimap.png
+58,MAP50,MKSC Rainbow Road,02:00.00,01:23.25,/w/images/7/75/MAP50-kart.png,/w/images/0/06/MAP50-kart-minimap.png
+60,MAP51,SMK Donut Plains 1,01:40.00,01:25.80,/w/images/1/12/MAP51-kart.png,/w/images/e/eb/MAP51-kart-minimap.png
+61,MAP52,SMK Mario Circuit 2,01:45.00,01:23.71,/w/images/3/3e/MAP52-kart.png,/w/images/4/44/MAP52-kart-minimap.png
+62,MAP53,SMK Ghost Valley 2,01:30.00,01:08.25,/w/images/5/50/MAP53-kart.png,/w/images/6/61/MAP53-kart-minimap.png
+63,MAP54,SMK Bowser Castle 3,02:30.00,02:02.62,/w/images/2/29/MAP54-kart.png,/w/images/f/f7/MAP54-kart-minimap.png
+64,MAP55,SMK Vanilla Lake 2,01:30.00,01:07.02,/w/images/d/d9/MAP55-kart.png,/w/images/a/af/MAP55-kart-minimap.png
+66,MAP56,Lake Margorite (by MK),—,—,/w/images/f/ff/MAP56-kart.png,/w/images/a/aa/MAP56-kart-minimap.png
+67,MAP57,Coastal Temple (by TG),—,—,/w/images/f/f7/MAP57-kart.png,/w/images/e/eb/MAP57-kart-minimap.png
+68,MAP58,"Kart Airlines (by V.R.T,)",—,—,/w/images/e/eb/MAP58-kart.png,/w/images/b/b1/MAP58-kart-minimap.png
+69,MAP59,Opulence (by Ivo),—,—,/w/images/7/74/MAP59-kart.png,/w/images/a/ab/MAP59-kart-minimap.png
+70,MAP60,Crimson Core (by Ninferno),—,—,/w/images/a/a8/MAP60-kart.png,/w/images/2/26/MAP60-kart-minimap.png
+,MAPxx,Map name,Silver time,Gold time,Picture,Minimap
+0,MAPH0,Crystal Abyss Zone,,,/w/images/4/41/MAPH0-kart.png,/w/images/7/7e/MAPH0-kart-minimap.png
+1,MAPH1,Peach's Castle,,,/w/images/9/9c/MAPH1-kart.png,/w/images/3/35/MAPH1-kart-minimap.png
+2,MAPH2,Arid Sands,,,/w/images/5/56/MAPH2-kart.png,/w/images/1/1e/MAPH2-kart-minimap.png
+3,MAPH3,Volcanic Valley Classic,,,/w/images/b/b1/MAPH3-kart.png,/w/images/c/c9/MAPH3-kart-minimap.png
+4,MAPH4,Chemical Facility Zone,,,/w/images/7/7c/MAPH4-kart.png,/w/images/8/89/MAPH4-kart-minimap.png
+5,MAPH5,3 Color Drive,,,/w/images/0/0d/MAPH5-kart.png,/w/images/2/29/MAPH5-kart-minimap.png
+6,MAPH6,CK Cloud Tops,,,/w/images/b/b6/MAPH6-kart.png,/w/images/a/af/MAPH6-kart-minimap.png
+7,MAPH7,CK Dungeon Maze,,,/w/images/6/6b/MAPH7-kart.png,/w/images/8/81/MAPH7-kart-minimap.png
+8,MAPH8,Diamond Square Classic,,,/w/images/6/67/MAPH8-kart.png,/w/images/4/4d/MAPH8-kart-minimap.png
+9,MAPH9,PWR Retro Maze,,,/w/images/b/be/MAPH9-kart.png,/w/images/7/73/MAPH9-kart-minimap.png
+10,MAPHA,SRB2 Frozen Night,,,/w/images/0/09/MAPHA-kart.png,/w/images/f/f7/MAPHA-kart-minimap.png
+11,MAPHB,Black Bliss,,,/w/images/3/3d/MAPHB-kart.png,/w/images/d/df/MAPHB-kart-minimap.png
+12,MAPHC,FZ Silence,,,/w/images/e/e6/MAPHC-kart.png,/w/images/2/24/MAPHC-kart-minimap.png
+13,MAPHD,SMK Rainbow Road,,,/w/images/e/ed/MAPHD-kart.png,/w/images/c/c4/MAPHD-kart-minimap.png
+14,MAPHE,SRB2 Meadow Match,,,/w/images/b/bb/MAPHE-kart.png,/w/images/f/f3/MAPHE-kart-minimap.png
+15,MAPHF,battal BOWL,,,/w/images/e/eb/MAPHF-kart.png,/w/images/8/8b/MAPHF-kart-minimap.png
+16,MAPHG,Peach's Castle B,,,/w/images/c/c5/MAPHG-kart.png,/w/images/3/32/MAPHG-kart-minimap.png
+17,MAPHH,Blue Mountain Classic,,,/w/images/a/af/MAPHH-kart.png,/w/images/3/31/MAPHH-kart-minimap.png

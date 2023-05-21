@@ -1,0 +1,6 @@
+[2023-05-20 02:01:43]SRB2 Status Message: Server has been started!
+[2023-05-20 02:01:45]SRB2 Status Message: Map is now "MAP27: Aurora Atoll Zone"
+[2023-05-20 02:02:00]SRB2 Status Message: Server has been started!
+[2023-05-20 02:02:55]SRB2 Status Message: Map is now "MAP27: Aurora Atoll Zone"
+[2023-05-20 02:12:09]Discord command: <Nixodemus1#8347> !srb2k
+[2023-05-20 02:27:00]SRB2 Status Message: Server has shutdown

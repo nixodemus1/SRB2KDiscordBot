@@ -1,0 +1,13 @@
+[2023-05-20 02:30:43]SRB2 Status Message: Server has been started!
+[2023-05-20 02:30:43]SRB2 Status Message: Map is now "MAP27: Aurora Atoll Zone"
+[2023-05-20 02:30:43]SRB2 Message: [1]:rocket:Player 2 has joined the game:rocket:
+[2023-05-20 02:30:43]SRB2 Message: [1]:pencil2:Player 2 renamed to Sonic:pencil2:
+[2023-05-20 02:30:43]SRB2 Message: [1]:door:Sonic left the game:door:
+[2023-05-20 02:31:08]SRB2 Status Message: Server has been started!
+[2023-05-20 02:31:34]SRB2 Message: [1]:rocket:Player 2 has joined the game:rocket:
+[2023-05-20 02:31:36]SRB2 Status Message: Map is now "MAP27: Aurora Atoll Zone"
+[2023-05-20 02:31:37]SRB2 Message: [1]:pencil2:Player 2 renamed to Sonic:pencil2:
+[2023-05-20 02:34:26]SRB2 Message: [1]<Sonic> 1 more lap
+[2023-05-20 02:36:34]SRB2 Status Message: Server has shutdown
+[2023-05-20 02:36:44]SRB2 Status Message: Server has been started!
+[2023-05-20 02:36:45]SRB2 Status Message: Map is now "MAP27: Aurora Atoll Zone"

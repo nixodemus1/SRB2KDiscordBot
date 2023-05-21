@@ -11,6 +11,7 @@ from colorama import Style
 from tkinter import messagebox
 from sys import stderr
 import asyncio
+import pandas as pd
 import transliterate
 import subprocess
 import datetime
@@ -20,7 +21,6 @@ import shutil
 import psutil
 import json
 import time
-import json
 import sys
 import re
 
@@ -345,6 +345,13 @@ emotes = {}
 bannedsavemaps = []
 allowroles = []
 allowmembers = []
+mainmap = ''
+minmap = ''
+silver = ''
+gold = ''
+r_flag = False
+race = 12
+botlife = True
 
 #Create empty configuration file for autorestart
 if os.path.isfile("srb2discordbot/autorestart.cfg") == False:
@@ -675,8 +682,6 @@ def startserver():
         else:
             processsrb2 = subprocess.Popen(config["srb2exe"] + " " + mapsrb2 + " " + currentpcfg + " " + parameters)
         isstarted = True
-        #this is where we would send the server invite
-        createActivity()
 
 
 #Restarting the server if it is closed for any reason
@@ -720,11 +725,35 @@ def restartserver():
     else:
         processsrb2 = subprocess.Popen(config["srb2exe"] + " " + mapsrb2 + " " + currentpcfg + " " + parameters)
     isstarted = True
-    createActivity()
 
+def get_urls(url):
+
+    #Open the csv and a dataframe
+    csv = open("maps.csv", 'r')
+    maps = pd.read_csv(csv)
+    csv.close()
+
+    url = url.strip('\n')
+
+    for mapname in maps['MAPxx']:
+        if url in mapname:
+            list = maps.index[maps['MAPxx'] == mapname].to_list()
+            map_pic = maps.loc[maps.index[list[0]], 'Picture']
+            minmap = maps.loc[maps.index[list[0]], 'Minimap']
+            silver = maps.loc[maps.index[list[0]], 'Silver time']
+            gold = maps.loc[maps.index[list[0]], 'Gold time']
+            if len(silver) < 2:
+                silver = 'N/A'
+                gold = 'N/A'
+            return map_pic, minmap, silver, gold
+        else:
+            pass
+    return '/w/images/b/b6/Credit04HQ.png','/w/images/b/b6/Credit04HQ.png','N/A','N/A'
 
 #This function creates an embed containing information about the SRB2 server
 def getsrbstats():
+    #run wiki test.py
+    #wiki = subprocess.Popen('import wiki test.py')
     #Get global variables
     global embedstats
     global botname
@@ -734,6 +763,11 @@ def getsrbstats():
     global currentpcfg
     global countpcfg
     global url_cfgs
+    global mainmap
+    global minmap
+    global silver
+    global gold
+    global race
     #Each line in the embed is 1024 characters max
     #So the list of the players divided into parts
     players = {1: '', 2: '', 3: '', 4: '',5: '', 6: '', 7: '', 8: ''}
@@ -750,14 +784,11 @@ def getsrbstats():
         gamemap = srbstats.readline()
         #Get map number only
         iconmap = srbstats.readline()
+        mainmap, minmap, silver, gold = get_urls(iconmap)
         #Get nextmap and map number
         nextlevel = srbstats.readline()
         #Get info about emeralds
         emeralds = srbstats.readline()
-        if emeralds == '':
-            emeralds = "No Emeralds"
-        for element in emotes:
-            emeralds = emeralds.replace(element, emotes[element])
         #Get all skins on the server
         skins = srbstats.readline()
         for element in emotes:
@@ -769,31 +800,38 @@ def getsrbstats():
         #Get count of players
         countp = srbstats.readline()
         #Get link of level image
-        linktb = "http://"+config["url"]+"/levelpictures/thumbnail/"+iconmap+".png"
+        linktb = "http://"+config["url"]+mainmap
+        linkmm = "http://"+config["url"]+minmap
         if restart_pcfg:
             try:
                 if url_cfgs[str(countpcfg)].lower() == "default":
-                    linktb = "http://"+config["url"]+"/levelpictures/thumbnail/"+iconmap+".png"
+                    linktb = "http://"+config["url"]+mainmap
+                    linkmm = "http://"+config["url"]+minmap
                 elif url_cfgs[str(countpcfg)].lower() == "none":
-                    linktb = "http://none.kek/levelpictures/thumbnail/"+iconmap+".png"
+                    linktb = "http://none.kek/levelpictures/thumbnail"+mainmap
+                    linkmm = "http://none.kek/levelpictures/thumbnail"+minmap
                 else:
-                    linktb = "http://"+url_cfgs[str(countpcfg)]+"/levelpictures/thumbnail/"+iconmap+".png"
+                    linktb = "http://"+url_cfgs[str(countpcfg)]+mainmap
+                    linkmm = "http://"+url_cfgs[str(countpcfg)]+minmap
+
             except KeyError:
+                print("key error")
                 pass
         #Remove a line break in URL
         linktb = (linktb.translate({ord('\n'): ''}))
+        linkmm = (linkmm.translate({ord('\n'): ''}))
         #EMBEDS!
-        embedstats=discord.Embed(title=servername+" Statistics", url="https://bit.ly/3APCzSQ", description="Server information", color=0x00feff)
-        embedstats.set_author(name=botname, url="https://ms.srb2.org", icon_url=botavatar)
-        embedstats.set_thumbnail(url=linktb)
+        embedstats=discord.Embed(title=servername+" Statistics", url="https://bit.ly/3APCzSQ", description="Server information", color=discord.Color.dark_red())
+        embedstats.set_author(name=botname, url="https://ms.kartkrew.org/", icon_url=botavatar)
+        embedstats.set_thumbnail(url=linkmm)
         embedstats.add_field(name="Leveltime", value=leveltime, inline=True)
         embedstats.add_field(name="Servertime", value=servertime, inline=True)
         embedstats.add_field(name="Players", value=countp, inline=True)
         embedstats.add_field(name="Map", value=gamemap, inline=True)
-        embedstats.add_field(name="Nextmap", value=nextlevel, inline=True)
-        if gametype:
-            embedstats.add_field(name="Gametype", value=gametype, inline=True)
+        embedstats.add_field(name="Silver time", value=silver, inline=True)
+        embedstats.add_field(name="Gold time", value=gold, inline=True)
         embedstats.add_field(name="Skins", value=skins, inline=True)
+        embedstats.add_field(name="# Races left", value=race, inline=True)
         #Split player list
         while True:
             if cline != 6 or (cline == 6 and plist == 8):
@@ -812,6 +850,7 @@ def getsrbstats():
         #Last list
         if players[plist] != '':
             embedstats.add_field(name="Players list#"+str(plist), value=(players[plist]), inline=False)
+        embedstats.set_image(url=linktb)
         embedstats.set_footer(text=servername+" "+config["ip"])
         srbstats.close()
         #Change a title of console
@@ -866,7 +905,13 @@ class MyClient(discord.Client):
         global currentmap
         global pastmap
         global gamepaused
-
+        global mainmap
+        global minmap
+        global silver
+        global gold
+        global race
+        global r_flag
+        global botlife
 
         #Print bot name to console on successful connection
         print(Style.BRIGHT + Back.GREEN + 'SUCCESS:' + Style.RESET_ALL + Fore.GREEN + ' logged on as {0}!'.format(self.user))
@@ -894,7 +939,7 @@ class MyClient(discord.Client):
 
         startserver()
         #Program loop
-        while True:
+        while botlife == True:
             try:
                 #Current time
                 now = datetime.datetime.now()
@@ -995,7 +1040,21 @@ class MyClient(discord.Client):
                                 time.sleep(1)
                             await client.change_presence(status=discord.Status.dnd,activity=discord.Game("Restarting server..."))
                             restartserver()
-
+                        #do stuff at end of race    
+                        elif line.startswith("The round has ended"):
+                            #so it will give a list of players in the order num: # node: # playername
+                            if r_flag == True and race > 0:
+                                race = race - 1
+                            elif race == 0:
+                                await client.change_presence(status=discord.Status.online,activity=discord.Game("final race!"))
+                                #read in the end times of each player and put them in pandas
+                            elif race < 0:
+                                await client.change_presence(status=discord.Status.dnd,activity=discord.Game("gp over"))
+                                #send final data and quit
+                                dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
+                                dcon.write("allowjoin 1")
+                                dcon.close
+                                quit()
                         
                         #Restart after server crash
                         elif line.startswith("Process killed by signal") or line.startswith("I_Error():") and not line.endswith("was not found or not valid."):
@@ -1266,6 +1325,7 @@ class MyClient(discord.Client):
                         except:
                             if config["debug"] == True:
                                 print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' failed to update embed with information')
+        quit()
 
                                 
     #Works when someone sends a message to discord
@@ -1273,6 +1333,9 @@ class MyClient(discord.Client):
         global discordcmdmsg
         global server_isplaying
         global gamepaused
+        global race
+        global r_flag
+        global botlife
         #Current time
         now = datetime.datetime.now()
         #Create a list of allowed characters that will not be removed from the message
@@ -1408,8 +1471,8 @@ class MyClient(discord.Client):
 
                                     
                         if message.content.startswith(config["botprefix"]+"help"):
-                            command_embed=discord.Embed(title="List of commands", description=config["botprefix"]+"kick - Kicks a player off the server\n"+config["botprefix"]+"ban - Bans a player on the server\n"+config["botprefix"]+"map - Changes the map on the server\n"+config["botprefix"]+"csay - Sends a message to everyone within a netgame which is displayed in the center of the screen\n"+config["botprefix"]+"exitlevel - Skips the current server map\n"+config["botprefix"]+"restart - Restarts the server", color=0xffff00)
-                            command_embed.set_author(name=botname, url="https://ms.srb2.org", icon_url=botavatar)
+                            command_embed=discord.Embed(title="List of commands", description=config["botprefix"]+"kick - Kicks a player off the server\n"+config["botprefix"]+"ban - Bans a player on the server\n"+config["botprefix"]+"map - Changes the map on the server\n"+config["botprefix"]+"csay - Sends a message to everyone within a netgame which is displayed in the center of the screen\n"+config["botprefix"]+"exitlevel - Skips the current server map\n"+config["botprefix"]+"restart - Restarts the server\n"+config["botprefix"]+"quit - quits the server and bot\n"+config["botprefix"]+"#races - sets the # of races for the gp\n"+config["botprefix"]+"startrace - starts the gp after everyone is in the lobby", color=0xffff00)
+                            command_embed.set_author(name=botname, url="https://ms.kartkrew.org/", icon_url=botavatar)
                             await message.channel.send(embed=command_embed, reference=message)
                             command_embed = None
 
@@ -1565,6 +1628,7 @@ class MyClient(discord.Client):
                             if message.content.startswith(config["botprefix"]+"exitlevel"):
                                 if gamepaused == False and server_isplaying == True:
                                     #Open a file and write message
+                                    r_flag = False
                                     dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                                     dcon.write("exitlevel\n")
                                     dcon.close
@@ -1588,6 +1652,74 @@ class MyClient(discord.Client):
                                     await client.get_channel(config["post_id"]).send("❌`Server has shutdown`❌")
                                     await client.change_presence(status=discord.Status.dnd,activity=discord.Game("Restarting server..."))
                                     restartserver()
+                            
+                            if message.content.startswith(config["botprefix"]+"quit"):
+                                await message.add_reaction("✅")
+                                await client.get_channel(config["post_id"]).send("❌`Server has shutdown`❌")
+                                await client.change_presence(status=discord.Status.dnd,activity=discord.Game("Ending races"))
+                                print("server shutting down")
+                                dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
+                                dcon.write("quit")
+                                dcon.close()
+                                for proc in psutil.process_iter():
+                                    name = proc.name()
+                                    #Close the server
+                                    if ("SRB2K/" + name) == config["srb2exe"]:
+                                        x = config["srb2exe"].split("/")
+                                        os.system("taskkill /f /im " + x[1])
+                                        break
+                                
+                                print('shutting down bot')
+                                await client.get_channel(config["post_id"]).send("❌`bot logging off!`❌")
+                                await client.close()
+                                botlife = False
+                                os.system("taskkill /f /im " + consoletitle)
+                                quit()
+                                
+
+                            if message.content.startswith(config["botprefix"]+"startrace"):
+                                if gamepaused == False and server_isplaying == True and race >= 0:
+                                    #Open a file and write message
+                                    dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
+                                    dcon.write("exitlevel\n")
+                                    dcon.write("clearscores\n")
+                                    dcon.write("getplayernum\n")
+                                    dcon.write("allowjoin 0")
+                                    dcon.close
+                                    r_flag = True
+                                    await message.add_reaction("✅")
+                                elif server_isplaying == False:
+                                    await message.add_reaction("❌")
+                                    await client.get_channel(config["post_id"]).send("server is not up yet")
+                                elif gamepaused == True:
+                                    command_embed=discord.Embed(title="⏸Game is Paused⏸", description="You cannot use this command when the server is paused", color=0xffff00)
+                                    await message.channel.send(embed=command_embed, reference=message)
+                                    command_embed = None
+                                elif race < 0:
+                                    await message.add_reaction("❌")
+                                    await client.get_channel(config["post_id"]).send("❌`# of races is not updated!`❌")
+
+                            if message.content.startswith(config["botprefix"]+"#races"):
+                                if message.content != config["botprefix"]+"#races" and message.content != config["botprefix"]+"#races " and message.content.startswith(config["botprefix"]+"#races "):
+                                    content = ('{0.content}\n'.format(message))
+                                    #Format the message
+                                    spacefind = content.find(" ")
+                                    content = (content.translate({ord('\n'): ' '}))
+                                    content = (content.translate({ord('\"'): 'а'}))
+                                    content = (content.translate({ord('\''): 'б'}))
+                                    content = content[spacefind+1:]
+                                    content = (reg.sub('', content))
+                                    content = (content.translate({ord('а'): '\"'}))
+                                    content = (content.translate({ord('б'): '\''}))
+                                    if r_flag == False:
+                                        race = int(content)
+                                        await message.add_reaction("✅")
+                                        await client.get_channel(config["post_id"]).send("✅`# of races updatede!`✅")
+                                    else:
+
+                                        await message.add_reaction("❌")
+                                        await client.get_channel(config["post_id"]).send("❌`# of races not updated: error`❌")
+
 
                         
                         elif not message.content.startswith(config["botprefix"]+"help") and message.content != config["botprefix"] and message.content != config["botprefix"]+" ":

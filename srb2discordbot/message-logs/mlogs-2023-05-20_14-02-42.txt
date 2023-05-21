@@ -1,0 +1,8 @@
+[2023-05-20 14:02:49]SRB2 Status Message: Server has been started!
+[2023-05-20 14:02:52]SRB2 Status Message: Map is now "MAP14: Twinkle Cart"
+[2023-05-20 14:03:49]SRB2 Message: [1]:rocket:Player 2 has joined the game:rocket:
+[2023-05-20 14:03:51]SRB2 Message: [1]:pencil2:Player 2 renamed to its enevitable giggle:pencil2:
+[2023-05-20 14:06:33]SRB2 Status Message: Map is now "MAP54: SMK Bowser Castle 3"
+[2023-05-20 14:10:06]SRB2 Status Message: Map is now "MAP53: SMK Ghost Valley 2"
+[2023-05-20 14:12:24]SRB2 Status Message: Map is now "MAP08: Hill Top Zone"
+[2023-05-20 14:14:40]SRB2 Status Message: Map is now "MAP09: Misty Maze Zone"

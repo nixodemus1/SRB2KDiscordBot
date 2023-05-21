@@ -1,3 +1,0 @@
-@echo off
-"C:\Users\Nick\AppData\Local\Programs\Python\Python39\python.exe" "C:\Users\Nick\Desktop\Test\srb2discordbot.py"
-pause

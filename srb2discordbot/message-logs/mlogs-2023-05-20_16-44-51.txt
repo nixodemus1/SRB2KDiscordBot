@@ -1,0 +1,5 @@
+[2023-05-20 16:45:02]SRB2 Status Message: Server has been started!
+[2023-05-20 16:45:04]SRB2 Status Message: Map is now "MAP23: Silvercloud Island Zone"
+[2023-05-20 16:45:44]SRB2 Status Message: Server has shutdown
+[2023-05-20 16:45:55]SRB2 Status Message: Server has been started!
+[2023-05-20 16:45:57]SRB2 Status Message: Map is now "MAP23: Silvercloud Island Zone"

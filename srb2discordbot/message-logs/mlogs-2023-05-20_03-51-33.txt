@@ -1,0 +1,2 @@
+[2023-05-20 03:51:40]SRB2 Status Message: Server has been started!
+[2023-05-20 03:51:42]SRB2 Status Message: Map is now "MAP21: Canyon Rush Zone"

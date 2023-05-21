@@ -1,0 +1,7 @@
+[2023-05-20 17:50:00]SRB2 Status Message: Server has been started!
+[2023-05-20 17:50:03]SRB2 Status Message: Map is now "MAP14: Twinkle Cart"
+[2023-05-20 17:50:57]SRB2 Message: [1]:rocket:Player 2 has joined the game:rocket:
+[2023-05-20 17:50:59]SRB2 Message: [1]:pencil2:Player 2 renamed to its enevitable giggle:pencil2:
+[2023-05-20 17:51:28]Discord command: <Nixodemus1#8347> !srb2k#races 3
+[2023-05-20 17:51:46]Discord command: <Nixodemus1#8347> !srb2kstartrace
+[2023-05-20 17:52:16]SRB2 Status Message: Map is now "MAP02: Dark Race"

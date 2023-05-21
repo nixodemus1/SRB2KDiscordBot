@@ -1,0 +1,7 @@
+[2023-05-20 03:10:20]SRB2 Status Message: Server has been started!
+[2023-05-20 03:10:20]SRB2 Status Message: Map is now "MAP27: Aurora Atoll Zone"
+[2023-05-20 03:12:33]SRB2 Message: [1]:rocket:Player 2 has joined the game:rocket:
+[2023-05-20 03:12:34]SRB2 Message: [1]:pencil2:Player 2 renamed to its enevitable giggle:pencil2:
+[2023-05-20 03:17:11]SRB2 Status Message: Map is now "MAP21: Canyon Rush Zone"
+[2023-05-20 03:17:54]SRB2 Message: [1]:door:its enevitable giggle left the game:door:
+[2023-05-20 03:18:28]SRB2 Status Message: Server has shutdown

@@ -1,0 +1,3 @@
+[2023-05-20 00:56:31]SRB2 Status Message: Server has been started!
+[2023-05-20 00:56:32]SRB2 Status Message: Map is now "MAP27: Aurora Atoll Zone"
+[2023-05-20 00:56:38]SRB2 Status Message: Server has shutdown
