@@ -1673,7 +1673,7 @@ class MyClient(discord.Client):
                                 await client.get_channel(config["post_id"]).send("❌`bot logging off!`❌")
                                 await client.close()
                                 botlife = False
-                                os.system("taskkill /f /im " + consoletitle)
+                                os.system("taskkill /f /im " + "Administrator: " + consoletitle)
                                 quit()
                                 
 
