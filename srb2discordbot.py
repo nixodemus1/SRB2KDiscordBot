@@ -11,6 +11,7 @@ from colorama import Style
 from tkinter import messagebox
 from sys import stderr
 import asyncio
+from sqlalchemy import create_engine
 import pandas as pd
 import transliterate
 import subprocess
@@ -860,6 +861,45 @@ def getsrbstats():
         if config["debug"] == True:
             print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' trouble in embed')
 
+def get_results():
+    global race
+    num = "race #" + race
+    #open the stats file
+    with open("SRB2K/luafiles/client/DiscordBot/stats.txt") as pr:
+        #get the line and its linenumber
+        result = open("results.txt", 'a+')
+        result.write(num)
+        for i, line in enumerate(pr):
+            #read after the 10th line
+            if i > 9:
+                #save dem stats
+                result.write(line)
+        result.close()
+
+def send_results():
+    #open the results and process them in a df
+    data = []
+    result = open("results.txt", 'r')
+    for line in result:
+        if line.startswith("race #"):
+            trash = line
+        else:
+            info = line.split('[')
+            num = info[1].split(']')
+            num = num[0]
+            keep = info[1].split('`')
+            name = keep[1]
+            last = keep[2].split(';')
+            score = last[0]
+            time = last[1]
+            score = score.replace(' Score - ', '')
+            time = time.replace(' Time - ', '')
+            res = [name, '', num, score, time]
+            data.append(res)
+    result.close()
+    data_table = pd.DataFrame(data, columns=['Name', 'discord', 'num', 'score', 'time'])
+    result = open('srb2discordbot/results.csv', 'w')
+    data_table.to_csv(result)
 
 class MyClient(discord.Client):
     async def on_ready(self):
@@ -1044,17 +1084,21 @@ class MyClient(discord.Client):
                         elif line.startswith("The round has ended"):
                             #so it will give a list of players in the order num: # node: # playername
                             if r_flag == True and race > 0:
+                                get_results()
                                 race = race - 1
-                            elif race == 0:
+                            elif r_flag == True and race == 0:
+                                get_results()
                                 await client.change_presence(status=discord.Status.online,activity=discord.Game("final race!"))
                                 #read in the end times of each player and put them in pandas
-                            elif race < 0:
+                            elif r_flag == True and race < 0:
+                                get_results()
                                 await client.change_presence(status=discord.Status.dnd,activity=discord.Game("gp over"))
                                 #send final data and quit
+                                send_results()
                                 dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                                 dcon.write("allowjoin 1")
                                 dcon.close
-                                quit()
+                                r_flag = False
                         
                         #Restart after server crash
                         elif line.startswith("Process killed by signal") or line.startswith("I_Error():") and not line.endswith("was not found or not valid."):
@@ -1673,12 +1717,20 @@ class MyClient(discord.Client):
                                 await client.get_channel(config["post_id"]).send("❌`bot logging off!`❌")
                                 await client.close()
                                 botlife = False
-                                os.system("taskkill /f /im " + "Administrator: " + consoletitle)
-                                quit()
+                                for proc in psutil.process_iter():
+                                    name = proc.name()
+                                    if consoletitle in name:
+                                        os.system("taskkill /f /im " + name)
+                                        break
+                                await exit()
                                 
 
                             if message.content.startswith(config["botprefix"]+"startrace"):
                                 if gamepaused == False and server_isplaying == True and race >= 0:
+                                    #clear the results, create if doesnt exist
+                                    result = open("results.txt", 'w+')
+                                    result.write('')
+                                    result.close()
                                     #Open a file and write message
                                     dcon = open('SRB2K/luafiles/client/DiscordBot/console.txt', 'a')
                                     dcon.write("exitlevel\n")
