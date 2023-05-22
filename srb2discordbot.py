@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
+=======
+>>>>>>> 5c33adede95130915b6d99ff8d26d42aa9c55139
 #Set title of a console
 import os
 consoletitle = "SRB2K DiscordBot Console"
@@ -1818,6 +1821,7 @@ else:
     now = datetime.datetime.now()
     if config["debug"] == True:
         print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' program tries to start bot again')
+<<<<<<< HEAD
 =======
 #Set title of a console
 import os
@@ -3632,3 +3636,5 @@ else:
     if config["debug"] == True:
         print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' program tries to start bot again')
 >>>>>>> Stashed changes
+=======
+>>>>>>> 5c33adede95130915b6d99ff8d26d42aa9c55139
