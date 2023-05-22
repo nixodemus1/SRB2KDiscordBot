@@ -889,7 +889,7 @@ def send_results():
     data = []
     result = open("results.txt", 'r')
     for line in result:
-        if line.startswith("race #"):
+        if line.startswith("race #") or line == '\n':
             trash = line
         else:
             info = line.split('[')
@@ -900,8 +900,9 @@ def send_results():
             last = keep[2].split(';')
             score = last[0]
             time = last[1]
-            score = score.replace(' Score - ', '')
+            score = score.replace(': Score - ', '')
             time = time.replace(' Time - ', '')
+            time = time.replace('\n', '')
             res = [name, '', num, score, time]
             data.append(res)
     result.close()
