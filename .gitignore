@@ -48,3 +48,5 @@ SRB2K/discord-rpc.dll
 srb2discordbot/backups/config.json
 srb2discordbot/config.json
 *.json
+results.txt
+srb2discordbot/results.csv
