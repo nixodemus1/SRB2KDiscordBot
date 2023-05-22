@@ -1,6 +1,9 @@
 
 srb2discordbot/config.json
-srb2discordbot/backups/config.json
+srb2discordbot/backups/
+srb2discordbot/data
+srb2discordbot/message-logs
+srb2discordbot/srb2-logs
 SRB2K/music.kart
 SRB2K/textures.kart
 SRB2K/SRB2Kbot stuff.txt
@@ -15,6 +18,7 @@ SRB2K/README.txt
 SRB2K/mgwhelp.dll
 SRB2K/mdls/
 *.pk3
+*.wad
 SRB2K/mdls.dat
 SRB2K/maps.kart
 SRB2K/log.txt
