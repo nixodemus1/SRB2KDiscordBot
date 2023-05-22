@@ -1,2 +1,0 @@
-[2023-05-20 13:47:56]SRB2 Status Message: Server has been started!
-[2023-05-20 13:47:56]SRB2 Status Message: Map is now "MAP14: Twinkle Cart"

@@ -1,5 +1,0 @@
-[2023-05-20 16:37:23]SRB2 Status Message: Server has been started!
-[2023-05-20 16:37:25]SRB2 Status Message: Map is now "MAP23: Silvercloud Island Zone"
-[2023-05-20 16:37:47]Discord command: <Nixodemus1#8347> !srb2khelp
-[2023-05-20 16:37:56]Discord command: <Nixodemus1#8347> !srb2k#races
-[2023-05-20 16:38:03]Discord command: <Nixodemus1#8347> !srb2k#races 2

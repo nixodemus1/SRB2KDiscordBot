@@ -351,6 +351,7 @@ silver = ''
 gold = ''
 r_flag = False
 race = 12
+current = 12
 botlife = True
 
 #Create empty configuration file for autorestart
@@ -697,13 +698,13 @@ def restartserver():
     server_isplaying = False
     avoidautorestart = True
 
-    if botlife == False:
-        return
     if srblog != None:
         shutil.copy(r'SRB2K/log.txt', "srb2discordbot/srb2-logs/" + srblog)
         log_file = open("SRB2K/log.txt", "w")
         log_file.write("")
         log_file.close()
+    if botlife == False:
+        return
     print("Restarting server...             ")
     for proc in psutil.process_iter():
         name = proc.name()
@@ -773,6 +774,7 @@ def getsrbstats():
     global silver
     global gold
     global race
+    global current
     #Each line in the embed is 1024 characters max
     #So the list of the players divided into parts
     players = {1: '', 2: '', 3: '', 4: '',5: '', 6: '', 7: '', 8: ''}
@@ -825,6 +827,8 @@ def getsrbstats():
         #Remove a line break in URL
         linktb = (linktb.translate({ord('\n'): ''}))
         linkmm = (linkmm.translate({ord('\n'): ''}))
+        #make the race counter
+        num_races = "("+str(current)+"/"+str(race)+")"
         #EMBEDS!
         embedstats=discord.Embed(title=servername+" Statistics", url="https://bit.ly/3APCzSQ", description="Server information", color=discord.Color.dark_red())
         embedstats.set_author(name=botname, url="https://ms.kartkrew.org/", icon_url=botavatar)
@@ -836,7 +840,7 @@ def getsrbstats():
         embedstats.add_field(name="Silver time", value=silver, inline=True)
         embedstats.add_field(name="Gold time", value=gold, inline=True)
         embedstats.add_field(name="Skins", value=skins, inline=True)
-        embedstats.add_field(name="# Races left", value=race, inline=True)
+        embedstats.add_field(name="Races left", value=num_races, inline=True)
         #Split player list
         while True:
             if cline != 6 or (cline == 6 and plist == 8):
@@ -867,7 +871,7 @@ def getsrbstats():
 
 def get_results():
     global race
-    num = "race #" + race
+    num = "race # " + current +"/" + race
     #open the stats file
     with open("SRB2K/luafiles/client/DiscordBot/stats.txt") as pr:
         #get the line and its linenumber
@@ -956,6 +960,7 @@ class MyClient(discord.Client):
         global race
         global r_flag
         global botlife
+        global current
 
         #Print bot name to console on successful connection
         print(Style.BRIGHT + Back.GREEN + 'SUCCESS:' + Style.RESET_ALL + Fore.GREEN + ' logged on as {0}!'.format(self.user))
@@ -1087,14 +1092,14 @@ class MyClient(discord.Client):
                         #do stuff at end of race    
                         elif line.startswith("The round has ended"):
                             #so it will give a list of players in the order num: # node: # playername
-                            if r_flag == True and race > 0:
+                            if r_flag == True and current >= 0:
                                 get_results()
-                                race = race - 1
-                            elif r_flag == True and race == 0:
-                                get_results()
+                                current = current - 1
+                            elif r_flag == True and current == 0:
+                                await client.get_channel(config["post_id"]).send("🏁`Last race!`🏁")
                                 await client.change_presence(status=discord.Status.online,activity=discord.Game("final race!"))
                                 #read in the end times of each player and put them in pandas
-                            elif r_flag == True and race < 0:
+                            elif r_flag == True and current < 0:
                                 get_results()
                                 await client.change_presence(status=discord.Status.dnd,activity=discord.Game("gp over"))
                                 #send final data and quit
@@ -1374,6 +1379,7 @@ class MyClient(discord.Client):
                             if config["debug"] == True:
                                 print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' failed to update embed with information')
             if botlife == False:
+                file_log.close()
                 await client.close()
                 break
     
@@ -1726,7 +1732,7 @@ class MyClient(discord.Client):
                                 
 
                             if message.content.startswith(config["botprefix"]+"startrace"):
-                                if gamepaused == False and server_isplaying == True and race >= 0:
+                                if gamepaused == False and server_isplaying == True and current >= 0:
                                     #clear the results, create if doesnt exist
                                     result = open("results.txt", 'w+')
                                     result.write('')
@@ -1747,7 +1753,7 @@ class MyClient(discord.Client):
                                     command_embed=discord.Embed(title="⏸Game is Paused⏸", description="You cannot use this command when the server is paused", color=0xffff00)
                                     await message.channel.send(embed=command_embed, reference=message)
                                     command_embed = None
-                                elif race < 0:
+                                elif current < 0:
                                     await message.add_reaction("❌")
                                     await client.get_channel(config["post_id"]).send("❌`# of races is not updated!`❌")
 
@@ -1765,6 +1771,7 @@ class MyClient(discord.Client):
                                     content = (content.translate({ord('б'): '\''}))
                                     if r_flag == False:
                                         race = int(content)
+                                        current = race
                                         await message.add_reaction("✅")
                                         await client.get_channel(config["post_id"]).send("✅`# of races updatede!`✅")
                                     else:
