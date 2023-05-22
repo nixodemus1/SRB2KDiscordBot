@@ -692,8 +692,13 @@ def restartserver():
     global currentpcfg
     global countpcfg
     global avoidautorestart
+    global botlife
+
     server_isplaying = False
     avoidautorestart = True
+
+    if botlife == False:
+        return
     if srblog != None:
         shutil.copy(r'SRB2K/log.txt', "srb2discordbot/srb2-logs/" + srblog)
         log_file = open("SRB2K/log.txt", "w")
@@ -978,7 +983,7 @@ class MyClient(discord.Client):
 
         startserver()
         #Program loop
-        while botlife == True:
+        while True:
             try:
                 #Current time
                 now = datetime.datetime.now()
@@ -1368,7 +1373,10 @@ class MyClient(discord.Client):
                         except:
                             if config["debug"] == True:
                                 print("[" + now.strftime("%H:%M") + "]" + Fore.RED + 'Error:' + Style.RESET_ALL + ' failed to update embed with information')
-        quit()
+            if botlife == False:
+                await client.close()
+                break
+    
 
                                 
     #Works when someone sends a message to discord
@@ -1714,14 +1722,7 @@ class MyClient(discord.Client):
                                 
                                 print('shutting down bot')
                                 await client.get_channel(config["post_id"]).send("❌`bot logging off!`❌")
-                                await client.close()
                                 botlife = False
-                                for proc in psutil.process_iter():
-                                    name = proc.name()
-                                    if consoletitle in name:
-                                        os.system("taskkill /f /im " + name)
-                                        break
-                                await exit()
                                 
 
                             if message.content.startswith(config["botprefix"]+"startrace"):
