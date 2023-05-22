@@ -11,7 +11,6 @@ from colorama import Style
 from tkinter import messagebox
 from sys import stderr
 import asyncio
-from sqlalchemy import create_engine
 import pandas as pd
 import transliterate
 import subprocess

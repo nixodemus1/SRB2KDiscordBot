@@ -2,6 +2,7 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 import numpy as np
+from sqlalchemy import create_engine
 
 url = "https://wiki.srb2.org/wiki/SRB2Kart/Levels"
 header = {'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0'}
