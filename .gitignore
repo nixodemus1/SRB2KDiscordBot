@@ -1,3 +1,43 @@
 
 srb2discordbot/config.json
 srb2discordbot/backups/config.json
+SRB2K/music.kart
+SRB2K/textures.kart
+SRB2K/SRB2Kbot stuff.txt
+SRB2K/srb2kart.exe
+SRB2K/SRB2Kart (Standard).bat
+SRB2K/SRB2Kart (OpenGL).bat
+SRB2K/srb2.srb
+SRB2K/sounds.kart
+SRB2K/SDL2_mixer.dll
+SRB2K/SDL2.dll
+SRB2K/README.txt
+SRB2K/mgwhelp.dll
+SRB2K/mdls/
+*.pk3
+SRB2K/mdls.dat
+SRB2K/maps.kart
+SRB2K/log.txt
+SRB2K/luafiles
+SRB2K/LICENSE.txt
+SRB2K/LICENSE-3RD-PARTY.txt
+SRB2K/libvorbisfile-3.dll
+SRB2K/libvorbis-0.dll
+SRB2K/libopusfile-0.dll
+SRB2K/libopus-0.dll
+SRB2K/libogg-0.dll
+SRB2K/libmpg123-0.dll
+SRB2K/libmodplug-1.dll
+SRB2K/libgme.dll
+SRB2K/libFLAC-8.dll
+SRB2K/libcurl.dll
+SRB2K/kartdata.dat
+SRB2K/kartconfig.cfg
+SRB2K/HISTORY.txt
+SRB2K/gfx.kart
+SRB2K/exchndl.dll
+SRB2K/dkartconfig.cfg
+SRB2K/chars.kart
+SRB2K/bonuschars.kart
+SRB2K/ban.txt
+SRB2K/discord-rpc.dll
